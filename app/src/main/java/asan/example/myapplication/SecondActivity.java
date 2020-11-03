@@ -18,6 +18,7 @@ public class SecondActivity extends AppCompatActivity {
     private ImageView imageView;
     private EditText editText;
     private Button button;
+    String image;
 
     private static final int SELECT_IMAGE = 0;
 
@@ -42,6 +43,7 @@ public class SecondActivity extends AppCompatActivity {
                 String name = editText.getText().toString();
                 Intent intent = getIntent();
                 intent.putExtra("KEY", name);
+                intent.putExtra("REQ", image);
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -59,6 +61,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SELECT_IMAGE && resultCode == RESULT_OK && data != null) {
+            image = data.getDataString();
             Uri uri = data.getData();
             imageView.setImageURI(uri);
 
